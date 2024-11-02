@@ -1,22 +1,24 @@
 <%= form_with model: [ @article, @article.comments.build ], local: true do |form| %>
   <% comment = form.object %>
 
-  <p>
+  <div>
     <%= form.label :commenter %><br>
     <%= form.text_field :commenter %>
     <% @comment.errors.full_messages_for(:commenter).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </p>
-
-  <p>
+  </div>
+  <div>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
     <% @comment.errors.full_messages_for(:body).each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </p>
-  <p>
+  </div>
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, Visible::VALID_STATUSES, selected: article.status || "public" %>
+  </div>
     <%= form.submit %>
-  </p>
+  </div>
 <% end %>
